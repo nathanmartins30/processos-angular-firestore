@@ -1,0 +1,44 @@
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  .table {
+    width: 100%;
+  }
+  .add-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .mat-row .mat-cell {
+    cursor: pointer;
+  }
+</style>
+<div class="container">
+  <table mat-table [dataSource]="processos$" class="mat-elevation-z8 table">
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.numero }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="titulo">
+      <th mat-header-cell *matHeaderCellDef>Título</th>
+      <td mat-cell *matCellDef="let element">{{ element.titulo }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="openDialog(row)"
+    ></tr>
+  </table>
+  <div class="add-button">
+    <button mat-fab color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
